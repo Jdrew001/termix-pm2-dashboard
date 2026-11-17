@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - manifest.json
+      - package-lock.json
       - .github/workflows/release.yml
       - scripts/update-registry.mjs
   workflow_dispatch:
