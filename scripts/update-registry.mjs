@@ -17,7 +17,14 @@ const key = createPublicKey({
   format: "der",
   type: "spki",
 });
-if (!verify(null, bytes, key, Buffer.from(signature, "base64")))
+if (
+  !verify(
+    null,
+    createHash("sha256").update(bytes).digest(),
+    key,
+    Buffer.from(signature, "base64"),
+  )
+)
   throw new Error("Package signature verification failed");
 let previous = { plugins: [] };
 try {
