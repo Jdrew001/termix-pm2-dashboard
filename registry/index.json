@@ -1,0 +1,35 @@
+{
+  "registry": "abide-studios",
+  "name": "Abide Studios Plugins",
+  "apiVersion": 1,
+  "publicKey": "FU2kHPJSIOlVPlcFSjhC7Bil8nBhM3R0cgf7zUgSrMU=",
+  "updatedAt": "2026-11-17T22:44:36.554Z",
+  "plugins": [
+    {
+      "id": "pm2-dashboard",
+      "name": "PM2 Dashboard",
+      "description": "A dedicated PM2 menu with application metrics across your servers.",
+      "author": "Abide Studios",
+      "category": "Monitoring",
+      "repository": "https://github.com/Jdrew001/termix-pm2-dashboard",
+      "icon": "Activity",
+      "versions": [
+        {
+          "version": "1.6.2",
+          "api": "1",
+          "url": "https://github.com/Jdrew001/termix-pm2-dashboard/releases/download/v1.6.2/pm2-dashboard-1.6.2.tmxplug",
+          "sha256": "fd58f3e3d69cc6b4b458a2837327cfc01b923e3762914e200171988c79707334",
+          "signature": "qez0T8P0noNwZm0jTH9v8x0dg+eX48hBqLJGYHS2mRjOJqJj8AOnDvqPB7fCn2t9IHwDUa8wViFfOsdRCA2JCA==",
+          "size": 52310,
+          "capabilities": [
+            "network:serve",
+            "ui:surface",
+            "operations:invoke"
+          ],
+          "releaseNotesUrl": "https://github.com/Jdrew001/termix-pm2-dashboard/releases/tag/v1.6.2",
+          "publishedAt": "2026-11-17T22:44:36.554Z"
+        }
+      ]
+    }
+  ]
+}
