@@ -14,3 +14,8 @@ termix-plugin-signing.key
 .claude/
 .DS_Store
 Thumbs.db
+
+# Local administration receipts and helpers
+verification.json
+enable-local.mjs
+signing/

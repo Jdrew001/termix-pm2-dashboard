@@ -78,4 +78,16 @@ file per theme scoped under `.<id>`). A theme only plugin has no `src/`: just `m
 Keep this section current when the plugin changes: what it does, how it is put together, decisions that
 aren't obvious from the code, and anything that has bitten you before.
 
-- What it does: a template example that keeps short notes per user. Replace this.
+- What it does: Dedicated PM2 menu, automatic metrics, clickable process details and live regular/error/combined log tails. SDK 1.1.4 / plugin API 1.17 matches installed Termix 26.11.1. No database or workload mutations. The only operations invoked are Process Manager list-apps, list-processes and tail-logs. Abide automatic reads remain gated by the existing preference until its helper repair.
+- Live logs: authenticated SSE around serial two-second tail reads, source-header parsing, overlap delta handling, bounded client history, reconnect and disposal. Combined initial history is grouped by source; this is not a durable lossless collector. Never pass raw process arguments/environments to UI or persist log content.
+- SDK 2 frame tests in the latest template do not apply to this SDK 1 plugin. Preserve permission, sanitization, SSE cleanup, parsing and UI-control tests.
+
+- Log scrolling: keep stream subscription separate from viewport following. Scrolling up suspends following immediately; incoming samples must not move the reader. Resume only at the bottom or via Jump to latest. Manual Auto-scroll off overrides automatic resume.
+
+- Selection UX: floating Copy is limited to selections wholly inside the log viewport and preserves the selection on click. Do not move the viewport during an active selection. Follow-paused controls are positioned overlays inside a fixed-height log frame, never header content that shifts the log viewport.
+
+- Detail layout: keep the toolbar and key metrics compact; secondary fields are collapsed by default. The log section flexes into the remaining panel height. Avoid duplicate overview introductions in app details.
+
+PM2 log styling (1.5.0): process ID/name and OUT/ERR prefixes, timestamp/context/level/duration colors, subtle stderr gutter, and a plain-output toggle. Styling uses text spans only; original sanitized message text is preserved. Existing ANSI/control sanitization stays in place; timestamps are only highlighted when present, never fabricated.
+
+PM2 overview (1.6.0): compact grid cards and sortable table; view preference saved locally, search by app/state/PID. Server headers summarize online count and known process memory with sample time and stale status. Never imply scheduled Abide data is live. Process details and log controls remain unchanged.

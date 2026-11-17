@@ -1,36 +1,115 @@
 {
   "plugin": {
-    "name": "Hello World",
-    "description": "A minimal Termix plugin: one tab, one route, one setting and one table."
+    "name": "PM2 Dashboard",
+    "description": "A dedicated PM2 menu with application metrics across your servers."
   },
   "tab": {
-    "title": "Hello World",
-    "empty": "No notes yet.",
-    "placeholder": "Write a note",
-    "add": "Add",
-    "error": "Could not load or save notes."
+    "title": "PM2",
+    "description": "Application metrics across your servers",
+    "refresh": "Refresh metrics",
+    "loading": "Connecting\u2026",
+    "empty": "No PM2 applications reported",
+    "error": "Connection lost \u2014 the values below are stale. Retrying automatically.",
+    "failed": "Could not load the host list",
+    "manual": "Manual refresh \u00b7 monitoring only",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "restarts": "Restarts",
+    "pid": "PID",
+    "notLoaded": "Press Refresh metrics to connect.",
+    "automatic": "Automatic updates every 5 seconds while this page is visible",
+    "live": "Live \u00b7 every 5 seconds",
+    "paused": "Paused while this page is hidden",
+    "pending": "Automatic Abide updates will activate after the scheduled server repair tonight."
   },
   "permissions": {
     "use": {
-      "title": "Use Hello World",
-      "description": "Open the Hello World tab and keep notes in it."
+      "title": "View PM2 dashboard",
+      "description": "View PM2 metrics, process details and application logs for hosts you can access."
     }
   },
   "settings": {
-    "admin": {
-      "greeting": {
-        "label": "Greeting",
-        "description": "Shown at the top of the Hello World tab."
-      }
+    "abide": {
+      "label": "Automatically update Abide",
+      "description": "Enable after the scheduled PM2 helper repair has been verified. Until then, automatic status requests could start a stopped manager."
     }
   },
-  "operations": {
-    "count": {
-      "title": "Notes"
+  "detail": {
+    "open": "Open details and logs",
+    "back": "All PM2 apps",
+    "title": "Process details",
+    "owner": "Process owner",
+    "command": "Process name",
+    "state": "Process state",
+    "memoryPercent": "Host memory used",
+    "appId": "PM2 ID",
+    "host": "Server",
+    "unavailable": "Process details unavailable. The process may have restarted.",
+    "noProcess": "The previous PID is no longer running. Waiting for the next PM2 sample.",
+    "sample": "Last sample",
+    "backCompact": "Apps",
+    "more": "More details",
+    "less": "Less details"
+  },
+  "logs": {
+    "title": "Live logs",
+    "combined": "Combined",
+    "stdout": "Regular output",
+    "stderr": "Errors",
+    "unknown": "Unclassified",
+    "search": "Filter logs",
+    "pause": "Pause",
+    "resume": "Resume live logs",
+    "follow": "Auto-scroll",
+    "wrap": "Wrap lines",
+    "connected": "Live \u00b7 checks about every 2 seconds",
+    "connecting": "Connecting to logs\u2026",
+    "paused": "Paused",
+    "retrying": "Connection interrupted \u2014 reconnecting\u2026",
+    "empty": "No matching log lines yet.",
+    "rotation": "The log changed or rotated; showing the latest available lines.",
+    "partial": "Some source labels were unavailable; those lines are marked Unclassified.",
+    "tail": "Starts with the latest 200 lines per stream; keeps up to 2,000 lines in this view. Combined lines are labeled by source; initial history is grouped by file.",
+    "checked": "Last checked",
+    "clear": "Clear view",
+    "notLive": "Log data is stale until the connection resumes.",
+    "readingHistory": "Following paused",
+    "followOff": "Auto-scroll is off.",
+    "jumpLatest": "Jump to latest",
+    "readingHistoryHint": "Scroll to the bottom to follow new logs, or jump to the latest.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyFailed": "Copy failed",
+    "copySelection": "Copy selected logs",
+    "copyKeyboardHint": "Use \u2318C to copy the selected logs.",
+    "bufferSummary": "200 recent lines per stream \u00b7 up to 2,000 lines in this view",
+    "styled": "PM2 styling",
+    "short": {
+      "stdout": "OUT",
+      "stderr": "ERR",
+      "unknown": "?"
     },
-    "add": {
-      "title": "Add a note",
-      "text": "Note"
-    }
+    "filtered": "Filter active",
+    "clearFilter": "Clear filter",
+    "linesShown": "lines shown",
+    "applicationOutput": "Application output only \u00b7 Page visits appear in web access logs"
+  },
+  "list": {
+    "title": "PM2 overview",
+    "subtitle": "Your applications, at a glance. Open any process to inspect metrics and live logs.",
+    "servers": "servers",
+    "cadence": "5s metrics",
+    "search": "Find an app, status, or PID\u2026",
+    "view": "Application view",
+    "grid": "Grid",
+    "table": "Table",
+    "application": "Application",
+    "status": "Status",
+    "online": "online",
+    "live": "Live",
+    "scheduled": "Scheduled",
+    "stale": "Stale",
+    "noMatches": "No applications match your search.",
+    "inspect": "Inspect process"
   }
 }

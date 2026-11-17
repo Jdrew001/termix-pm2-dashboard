@@ -1,45 +1,70 @@
-name: Release
-
-# Run by hand from a dev-X.Y.Z branch. stable releases X.Y.Z and merges the
-# branch into main; beta publishes X.Y.Z-beta.N for plugins on the beta
-# channel. A release can't change once published, so a fix is a new version.
-
+name: Signed release
 on:
+  push:
+    branches: [main]
+    paths:
+      - manifest.json
+      - .github/workflows/release.yml
+      - scripts/update-registry.mjs
   workflow_dispatch:
-    inputs:
-      channel:
-        description: "Stable release or beta"
-        required: true
-        default: stable
-        type: choice
-        options:
-          - stable
-          - beta
-      mode:
-        description: "release or dry-run"
-        required: true
-        default: release
-        type: choice
-        options:
-          - release
-          - dry-run
-
-permissions: {}
-
+permissions:
+  contents: write
+concurrency:
+  group: signed-release
+  cancel-in-progress: false
 jobs:
   release:
-    permissions:
-      contents: write
-      # Build provenance, so the community registry can check where the file
-      # was built.
-      id-token: write
-      attestations: write
-    uses: Termix-SSH/Termix-Registry/.github/workflows/plugin-release.yml@main
-    with:
-      channel: ${{ inputs.channel }}
-      mode: ${{ inputs.mode }}
-    # Both optional: TERMIX_PAT to push workflow file changes to main,
-    # TERMIX_PLUGIN_SIGNING_KEY to also sign with your own key.
-    secrets:
-      TERMIX_PAT: ${{ secrets.TERMIX_PAT }}
-      TERMIX_PLUGIN_SIGNING_KEY: ${{ secrets.TERMIX_PLUGIN_SIGNING_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - name: Check for an existing immutable release
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "JSON.parse(require('fs').readFileSync('manifest.json')).version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.version.outputs.exists == 'false'
+        run: npm ci
+      - if: steps.version.outputs.exists == 'false'
+        name: Check and package
+        run: |
+          npm test
+          npm run typecheck
+          npm run validate
+          npm run build
+          npm run format:check
+          npx termix-plugin migrations --check
+          npm run pack
+      - if: steps.version.outputs.exists == 'false'
+        name: Sign and verify the update
+        env:
+          TERMIX_PLUGIN_SIGNING_KEY: ${{ secrets.TERMIX_PLUGIN_SIGNING_KEY }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          test -n "$TERMIX_PLUGIN_SIGNING_KEY"
+          npx termix-plugin sign "pm2-dashboard-$VERSION.tmxplug"
+          node scripts/update-registry.mjs
+      - if: steps.version.outputs.exists == 'false'
+        name: Publish signed release and feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          npx termix-plugin changelog --version "$VERSION" > /tmp/release-notes.md
+          gh release create "v$VERSION" "pm2-dashboard-$VERSION.tmxplug" "pm2-dashboard-$VERSION.tmxplug.sig" --target "$GITHUB_SHA" --title "PM2 Dashboard $VERSION" --notes-file /tmp/release-notes.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add registry/index.json
+          git commit -m "chore: publish signed update feed for $VERSION"
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,24 +1,16 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Termix-SSH/Termix/main/scripts/authz/authz.schema.json",
-  "seed": [
-    {
-      "as": "owner",
-      "method": "POST",
-      "path": "/plugin-api/hello-world/notes",
-      "body": { "text": "authz-own-note" }
-    }
-  ],
   "routes": {
-    "GET /plugin-api/hello-world/notes": {
-      "access": "user",
-      "permission": "hello-world.use",
-      "filtered": true,
-      "note": "Lists only the caller's own notes"
+    "GET /plugin-api/pm2-dashboard/hosts/:hostId/metrics": {
+      "permission": "pm2-dashboard.use",
+      "hostAccess": "Process Manager operation enforces current actor host connect access"
     },
-    "POST /plugin-api/hello-world/notes": {
-      "access": "user",
-      "permission": "hello-world.use",
-      "body": { "text": "authz" }
+    "GET /plugin-api/pm2-dashboard/hosts/:hostId/process/:pid": {
+      "permission": "pm2-dashboard.use",
+      "hostAccess": "Delegated process-manager.list-processes enforces acting-user connect access; returns safe fields only"
+    },
+    "GET /plugin-api/pm2-dashboard/hosts/:hostId/apps/:app/logs/stream": {
+      "permission": "pm2-dashboard.use",
+      "hostAccess": "Delegated process-manager.tail-logs rechecks acting-user access for every sample; PM2 source only, validated app name"
     }
   }
 }
