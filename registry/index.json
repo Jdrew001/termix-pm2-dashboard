@@ -3,7 +3,7 @@
   "name": "Abide Studios Plugins",
   "apiVersion": 1,
   "publicKey": "FU2kHPJSIOlVPlcFSjhC7Bil8nBhM3R0cgf7zUgSrMU=",
-  "updatedAt": "2026-11-17T22:44:36.554Z",
+  "updatedAt": "2026-11-17T22:56:54.677Z",
   "plugins": [
     {
       "id": "pm2-dashboard",
@@ -14,6 +14,21 @@
       "repository": "https://github.com/Jdrew001/termix-pm2-dashboard",
       "icon": "Activity",
       "versions": [
+        {
+          "version": "1.6.3",
+          "api": "1",
+          "url": "https://github.com/Jdrew001/termix-pm2-dashboard/releases/download/v1.6.3/pm2-dashboard-1.6.3.tmxplug",
+          "sha256": "0b828eff853ef04c9b1b06d8dc53cd1717cdb942a2b11f1f39ff1f2f84d82b9f",
+          "signature": "Q+FJRvDcrgSrLJp3IjqgkBBCahUkY65N1OFX0H9iqp2fqki0sS381Jn7Y+Sr1arEI//0+FKnjrK0x9Z/ri+xAA==",
+          "size": 52893,
+          "capabilities": [
+            "network:serve",
+            "ui:surface",
+            "operations:invoke"
+          ],
+          "releaseNotesUrl": "https://github.com/Jdrew001/termix-pm2-dashboard/releases/tag/v1.6.3",
+          "publishedAt": "2026-11-17T22:56:54.676Z"
+        },
         {
           "version": "1.6.2",
           "api": "1",
