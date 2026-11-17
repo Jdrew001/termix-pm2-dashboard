@@ -41,8 +41,8 @@ jobs:
         run: |
           npm test
           npm run typecheck
-          npm run validate
           npm run build
+          npm run validate
           npm run format:check
           npx termix-plugin migrations --check
           npm run pack
