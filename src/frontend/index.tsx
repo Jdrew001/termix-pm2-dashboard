@@ -16,6 +16,7 @@ import {
   Server,
   Radio,
 } from "lucide-react";
+import { accentSurface, accentSelection } from "./theme.js";
 import { ProcessDetail } from "./ProcessDetail.js";
 import { startPolling } from "./polling.js";
 import type { AppMetric } from "../shared/metrics.js";
@@ -220,10 +221,8 @@ function Dashboard({ app, isVisible }: { app: TermixApp; isVisible: boolean }) {
         <header className="space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <div
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-primary"
-              style={{
-                background: "linear-gradient(145deg, #38bdf815, #4ade8008)",
-              }}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-accent-brand"
+              style={accentSurface}
             >
               <Activity size={22} />
             </div>
@@ -238,7 +237,7 @@ function Dashboard({ app, isVisible }: { app: TermixApp; isVisible: boolean }) {
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <label className="flex min-w-40 flex-1 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-muted-foreground">
+            <label className="flex min-w-40 flex-1 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-muted-foreground focus-within:border-accent-brand">
               <Search size={14} />
               <input
                 aria-label={t("list.search")}
@@ -258,7 +257,8 @@ function Dashboard({ app, isVisible }: { app: TermixApp; isVisible: boolean }) {
                   key={mode}
                   aria-pressed={view === mode}
                   onClick={() => changeView(mode)}
-                  className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs ${view === mode ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                  style={view === mode ? accentSelection : undefined}
+                  className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs text-muted-foreground hover:text-accent-brand"
                 >
                   {mode === "grid" ? (
                     <LayoutGrid size={14} />

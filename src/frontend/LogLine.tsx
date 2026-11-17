@@ -2,15 +2,8 @@ import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
 import type { LogLine as Entry } from "../shared/logs.js";
 import { logTokens } from "../shared/log-style.js";
 
-const colors: Record<string, string> = {
-  timestamp: "#94a3b8",
-  context: "#38bdf8",
-  success: "#4ade80",
-  warning: "#fbbf24",
-  error: "#f87171",
-  debug: "#c084fc",
-  duration: "#a3e635",
-};
+import { accentColor, logColors } from "./theme.js";
+
 export function StyledLogLine({
   line,
   name,
@@ -30,7 +23,7 @@ export function StyledLogLine({
     <div
       className={`flex min-w-max gap-3 rounded-sm hover:bg-muted/40 ${wrap ? "whitespace-pre-wrap break-all min-w-0" : "whitespace-pre"}`}
       style={{
-        borderLeft: `2px solid ${error ? "#f8717155" : "transparent"}`,
+        borderLeft: `2px solid ${error ? "color-mix(in oklab, var(--destructive) 35%, transparent)" : "transparent"}`,
         paddingLeft: "0.4rem",
       }}
     >
@@ -39,7 +32,7 @@ export function StyledLogLine({
         title={t(`logs.${line.source}`)}
         className="select-none shrink-0 text-right text-muted-foreground"
         style={{
-          color: error ? "#f87171" : "#4ade80",
+          color: error ? "var(--destructive)" : accentColor,
           width: styled ? "auto" : "6rem",
           maxWidth: "14rem",
           overflow: "hidden",
@@ -52,7 +45,7 @@ export function StyledLogLine({
       </span>
       <span
         className="min-w-0 text-foreground"
-        style={styled && error ? { color: "#fca5a5" } : undefined}
+        style={styled && error ? { color: "var(--destructive)" } : undefined}
       >
         {styled
           ? logTokens(line.text).map((token, index) => (
@@ -61,7 +54,7 @@ export function StyledLogLine({
                 style={
                   token.kind
                     ? {
-                        color: colors[token.kind],
+                        color: logColors[token.kind],
                         fontWeight:
                           token.kind === "error" || token.kind === "warning"
                             ? 600

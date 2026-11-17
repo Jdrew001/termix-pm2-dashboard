@@ -23,3 +23,5 @@ PM2 log styling (1.5.0): process ID/name and OUT/ERR prefixes, timestamp/context
 PM2 overview (1.6.0): compact grid cards and sortable table; view preference saved locally, search by app/state/PID. Server headers summarize online count and known process memory with sample time and stale status. Never imply scheduled Abide data is live. Process details and log controls remain unchanged.
 
 1.6.1 makes active log search visible with counts and Clear filter. PM2 output is distinct from Nginx web access logs. Faith now uses a read-only server adapter combining giving/web PM2 homes, namespace-qualified IDs, no workload changes, safe-field metrics, bounded fixed-path logs.
+
+Theme integration (1.6.3): normal emphasis uses core --accent-brand, surfaces/text use core tokens, and log errors use --destructive. Read CSS variables directly; never cache an accent in React state. Appearance changes should apply immediately. Keep meaningful warning/success colors distinct from navigation and selection.

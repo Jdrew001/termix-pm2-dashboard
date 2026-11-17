@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
+import { accentColor } from "./theme.js";
 import type { AppMetric } from "../shared/metrics.js";
 export type AppView = "grid" | "table";
 type SortKey = "name" | "cpu" | "mem" | "restarts";
@@ -39,7 +40,7 @@ function CpuMeter({ value }: { value: number | null }) {
         className="h-full rounded-full"
         style={{
           width: `${Math.min(100, Math.max(0, value ?? 0))}%`,
-          background: (value ?? 0) > 80 ? "#fbbf24" : "#38bdf8",
+          background: (value ?? 0) > 80 ? "#fbbf24" : accentColor,
         }}
       />
     </div>
@@ -143,7 +144,7 @@ export function AppList({
                   <button
                     aria-label={`${row.name} — ${t("detail.open")}`}
                     onClick={() => onSelect(row.name)}
-                    className="block text-left hover:text-primary"
+                    className="block text-left hover:text-accent-brand"
                   >
                     <span className="block">{row.name}</span>
                     <span className="text-[10px] font-normal text-muted-foreground">
@@ -175,7 +176,7 @@ export function AppList({
                     title={t("detail.open")}
                     aria-label={`${row.name} — ${t("list.inspect")}`}
                     onClick={() => onSelect(row.name)}
-                    className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-primary"
+                    className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-accent-brand"
                   >
                     <ArrowUpRight size={15} />
                   </button>
@@ -193,7 +194,7 @@ export function AppList({
           key={row.name}
           onClick={() => onSelect(row.name)}
           aria-label={`${row.name} — ${t("detail.open")}`}
-          className="group min-w-0 rounded-lg border border-border bg-background p-3 text-left hover:border-primary hover:bg-muted/20"
+          className="group min-w-0 rounded-lg border border-border bg-background p-3 text-left hover:border-accent-brand hover:bg-muted/20"
         >
           <div className="flex items-center gap-2">
             <span

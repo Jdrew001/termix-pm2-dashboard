@@ -1,7 +1,7 @@
 {
   "id": "pm2-dashboard",
   "name": "PM2 Dashboard",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A dedicated PM2 menu with application metrics across your servers.",
   "author": {
     "name": "Abide Studios"

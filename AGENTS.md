@@ -91,3 +91,5 @@ aren't obvious from the code, and anything that has bitten you before.
 PM2 log styling (1.5.0): process ID/name and OUT/ERR prefixes, timestamp/context/level/duration colors, subtle stderr gutter, and a plain-output toggle. Styling uses text spans only; original sanitized message text is preserved. Existing ANSI/control sanitization stays in place; timestamps are only highlighted when present, never fabricated.
 
 PM2 overview (1.6.0): compact grid cards and sortable table; view preference saved locally, search by app/state/PID. Server headers summarize online count and known process memory with sample time and stale status. Never imply scheduled Abide data is live. Process details and log controls remain unchanged.
+
+Theme integration (1.6.3): normal emphasis uses core --accent-brand, surfaces/text use core tokens, and log errors use --destructive. Read CSS variables directly; never cache an accent in React state. Appearance changes should apply immediately. Keep meaningful warning/success colors distinct from navigation and selection.

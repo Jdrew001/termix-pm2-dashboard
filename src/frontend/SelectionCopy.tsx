@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "@termix-ssh/plugin-sdk/frontend";
+import { accentSurface } from "./theme.js";
 import type { LogSelection } from "./use-log-selection.js";
 export function SelectionCopy({ selection }: { selection: LogSelection }) {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ export function SelectionCopy({ selection }: { selection: LogSelection }) {
           : t("logs.copySelection")
       }
       className="absolute z-30 min-w-20 rounded-full border border-border bg-popover px-3 py-1.5 text-xs font-medium text-popover-foreground shadow-lg hover:bg-muted"
-      style={{ left: selection.left, top: selection.top }}
+      style={{ ...accentSurface, left: selection.left, top: selection.top }}
       onPointerDown={(event) => event.preventDefault()}
       onMouseDown={(event) => event.preventDefault()}
       onClick={() => void copy()}

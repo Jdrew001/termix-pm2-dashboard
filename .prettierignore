@@ -6,3 +6,6 @@ package-lock.json
 
 locales/translated
 migrations/snapshot.json
+
+# Machine-generated signed release feed
+registry/index.json

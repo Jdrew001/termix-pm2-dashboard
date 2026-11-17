@@ -4,6 +4,7 @@ import {
   type TermixApp,
 } from "@termix-ssh/plugin-sdk/frontend";
 import { StyledLogLine } from "./LogLine.js";
+import { accentColor, accentSelection } from "./theme.js";
 import { SelectionCopy } from "./SelectionCopy.js";
 import { useLogSelection } from "./use-log-selection.js";
 import { visibleLogs } from "../shared/logs.js";
@@ -97,7 +98,8 @@ export function LogViewer({
               <button
                 key={value}
                 aria-pressed={source === value}
-                className={`px-2 py-1 text-xs ${source === value ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
+                style={source === value ? accentSelection : undefined}
+                className="px-2 py-1 text-xs hover:bg-muted"
                 onClick={() => setSource(value)}
               >
                 {t(`logs.${value}`)}
@@ -129,6 +131,7 @@ export function LogViewer({
           <label className="flex gap-2 items-center">
             <input
               type="checkbox"
+              style={{ accentColor }}
               checked={autoScroll}
               onChange={(e) => {
                 setAutoScroll(e.target.checked);
@@ -140,6 +143,7 @@ export function LogViewer({
           <label className="flex gap-2 items-center">
             <input
               type="checkbox"
+              style={{ accentColor }}
               checked={wrap}
               onChange={(e) => setWrap(e.target.checked)}
             />
@@ -148,6 +152,7 @@ export function LogViewer({
           <label className="flex gap-2 items-center">
             <input
               type="checkbox"
+              style={{ accentColor }}
               checked={styled}
               onChange={(e) => setStyled(e.target.checked)}
             />
@@ -217,7 +222,7 @@ export function LogViewer({
               </span>
               <button
                 type="button"
-                className="font-medium text-foreground hover:text-primary"
+                className="font-medium text-foreground hover:text-accent-brand"
                 onClick={jumpToLatest}
               >
                 {t("logs.jumpLatest")}

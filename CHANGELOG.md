@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.3
+
+### Changed
+
+- Inherit the selected Termix accent for dashboard identity, active view/log controls, CPU meters, log contexts/prefixes and floating Copy.
+- Use theme surface, text and error tokens so Appearance changes apply live; retain distinct semantic warnings and successes.
+
 ## 1.6.2
 
 ### Added
