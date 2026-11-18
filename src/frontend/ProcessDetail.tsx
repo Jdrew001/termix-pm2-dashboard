@@ -6,6 +6,8 @@ import {
 } from "@termix-ssh/plugin-sdk/frontend";
 import type { AppMetric } from "../shared/metrics.js";
 import { startPolling } from "./polling.js";
+import { MetricCharts } from "./MetricCharts.js";
+import type { MetricPoint } from "../shared/history.js";
 import { LogViewer } from "./LogViewer.js";
 interface ProcessInfo {
   pid: number;
@@ -21,6 +23,7 @@ export function ProcessDetail({
   row,
   sampledAt,
   metricsStale,
+  history = [],
   isVisible,
   onBack,
 }: {
@@ -29,6 +32,7 @@ export function ProcessDetail({
   row: AppMetric;
   sampledAt: string;
   metricsStale: boolean;
+  history?: MetricPoint[];
   isVisible: boolean;
   onBack: () => void;
 }) {
@@ -150,6 +154,12 @@ export function ProcessDetail({
           {t("detail.noProcess")}
         </p>
       )}
+      <MetricCharts
+        history={history}
+        sampledAt={sampledAt}
+        stale={metricsStale}
+        isVisible={isVisible}
+      />
       <LogViewer
         key={`${host.id}:${row.name}`}
         app={app}

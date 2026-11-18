@@ -93,3 +93,5 @@ PM2 log styling (1.5.0): process ID/name and OUT/ERR prefixes, timestamp/context
 PM2 overview (1.6.0): compact grid cards and sortable table; view preference saved locally, search by app/state/PID. Server headers summarize online count and known process memory with sample time and stale status. Never imply scheduled Abide data is live. Process details and log controls remain unchanged.
 
 Theme integration (1.6.3): normal emphasis uses core --accent-brand, surfaces/text use core tokens, and log errors use --destructive. Read CSS variables directly; never cache an accent in React state. Appearance changes should apply immediately. Keep meaningful warning/success colors distinct from navigation and selection.
+
+Usage charts (1.7.0): record existing successful host samples in memory while visible, bounded to ten minutes/121 points per app. Namespaced app keys remain independent. Detail CPU and memory charts offer 1/5/10-minute ranges and pointer/keyboard inspection. Gaps break on null readings, PID changes and intervals above 15 seconds. Never fabricate points or imply durable historical data; history is session-only.

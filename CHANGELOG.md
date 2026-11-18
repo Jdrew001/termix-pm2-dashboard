@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.0
+
+### Added
+
+- Live CPU and memory history charts in process details, with 1/5/10-minute views and pointer/keyboard inspection.
+- Bounded session history collected from existing five-second samples; visible gaps on restarts, missing metrics and disconnects. No persistent monitoring database or additional server permissions.
+
 ## 1.6.3
 
 ### Changed

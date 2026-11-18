@@ -111,5 +111,16 @@
     "stale": "Stale",
     "noMatches": "No applications match your search.",
     "inspect": "Inspect process"
+  },
+  "history": {
+    "title": "Usage history",
+    "peak": "Peak",
+    "range": "History time range",
+    "minuteShort": "m",
+    "cadence": "5s samples",
+    "stale": "Connection lost \u00b7 history paused",
+    "paused": "Paused while hidden",
+    "collecting": "Collecting real samples\u2026 Hover or use arrow keys to inspect.",
+    "session": "Last 10 minutes of this open session \u00b7 gaps mark disconnects or process restarts \u00b7 hover to inspect"
   }
 }

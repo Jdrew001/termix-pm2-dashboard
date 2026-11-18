@@ -25,3 +25,5 @@ PM2 overview (1.6.0): compact grid cards and sortable table; view preference sav
 1.6.1 makes active log search visible with counts and Clear filter. PM2 output is distinct from Nginx web access logs. Faith now uses a read-only server adapter combining giving/web PM2 homes, namespace-qualified IDs, no workload changes, safe-field metrics, bounded fixed-path logs.
 
 Theme integration (1.6.3): normal emphasis uses core --accent-brand, surfaces/text use core tokens, and log errors use --destructive. Read CSS variables directly; never cache an accent in React state. Appearance changes should apply immediately. Keep meaningful warning/success colors distinct from navigation and selection.
+
+Usage charts (1.7.0): record existing successful host samples in memory while visible, bounded to ten minutes/121 points per app. Namespaced app keys remain independent. Detail CPU and memory charts offer 1/5/10-minute ranges and pointer/keyboard inspection. Gaps break on null readings, PID changes and intervals above 15 seconds. Never fabricate points or imply durable historical data; history is session-only.

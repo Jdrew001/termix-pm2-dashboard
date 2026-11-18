@@ -19,6 +19,11 @@ import {
 import { accentSurface, accentSelection } from "./theme.js";
 import { ProcessDetail } from "./ProcessDetail.js";
 import { startPolling } from "./polling.js";
+import {
+  appendMetricSample,
+  metricKey,
+  type MetricHistory,
+} from "../shared/history.js";
 import type { AppMetric } from "../shared/metrics.js";
 type Sample = { apps: AppMetric[]; sampledAt: string };
 function HostMetrics({
@@ -42,6 +47,7 @@ function HostMetrics({
 }) {
   const { t } = useTranslation();
   const [sample, setSample] = useState<Sample>();
+  const [history, setHistory] = useState<MetricHistory>({});
 
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -54,6 +60,13 @@ function HostMetrics({
         const result = await app.api.get<Sample>(`/hosts/${host.id}/metrics`);
         if (active) {
           setSample(result.data);
+          setHistory((previous) =>
+            appendMetricSample(
+              previous,
+              result.data.apps,
+              result.data.sampledAt,
+            ),
+          );
           setFailed(false);
         }
       } catch {
@@ -86,6 +99,7 @@ function HostMetrics({
         row={selectedRow}
         sampledAt={sample?.sampledAt ?? ""}
         metricsStale={failed}
+        history={history[metricKey(selectedRow)] ?? []}
         isVisible={isVisible}
         onBack={() => onSelect(null)}
       />
